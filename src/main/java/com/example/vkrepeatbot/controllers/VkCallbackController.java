@@ -1,8 +1,10 @@
 package com.example.vkrepeatbot.controllers;
 
+import com.example.vkrepeatbot.exceptions.TypeNotSupportedException;
 import com.example.vkrepeatbot.models.Event;
 import com.example.vkrepeatbot.services.MessageService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,15 +25,19 @@ public class VkCallbackController {
     public String handleCallback(@RequestBody Event event) {
         String type = event.getType();
 
-        // Проверка типа события
         if (type.equals("confirmation")) {
             return confirmationCode;
         } else if (type.equals("message_new")) {
             messageService.handleMessageNew(event);
             return "ok";
+        } else {
+            throw new TypeNotSupportedException(event);
         }
+    }
 
-        // Для подтверждения работы Callback API необходимо вернуть 'ok'
-        return "ok";
+    @ExceptionHandler(TypeNotSupportedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleTypeNotSupportedException(TypeNotSupportedException ex) {
+        return "Unsupported event type: " + ex.getType();
     }
 }

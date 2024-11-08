@@ -1,7 +1,9 @@
 package com.example.vkrepeatbot.exceptions;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class FailedMessageException extends RuntimeException {
     private final HttpStatus status;
     private final int errorCode;
@@ -19,17 +21,5 @@ public class FailedMessageException extends RuntimeException {
         this.status = status;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
-    }
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
     }
 }

@@ -8,7 +8,7 @@
 ![Привет](https://github.com/user-attachments/assets/1cd08c7d-fb1d-4721-8549-554d0fd4e1fa)
 
 ## Требования
-Java 17 или выше
+Java 17 или выше<br>
 Maven 3.3.2 или выше
 
 ## Подготовка к использованию

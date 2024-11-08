@@ -4,6 +4,10 @@
 
 Бот отправляет в ответ на любое сообщение то же самое сообщение пользователя.
 
+## Пример работы
+![Привет](https://github.com/user-attachments/assets/1cd08c7d-fb1d-4721-8549-554d0fd4e1fa)
+
+
 ## Подготовка к использованию
 Укажите свои данные в [application.properties](https://github.com/Starkvell/VkRepeatBot/blob/main/src/main/resources/application.properties).
 Ключ доступа сообщества API и код подтверждения для Callback API Вы можете получить в настройках сообщества. Подробнее о получении ключа доступа для  можно прочитать [здесь](https://dev.vk.com/ru/api/access-token/community-token/in-community-settings).

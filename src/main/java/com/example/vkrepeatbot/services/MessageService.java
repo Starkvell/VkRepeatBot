@@ -108,7 +108,28 @@ public class MessageService {
     }
 
     private boolean isOldVersion(Event event) {
-        return event.getV().compareTo("5.103") < 0;
+        String version = event.getV();
+        String minimumVersion = "5.103";
+
+        // Разделяем строки версии по точке
+        String[] currentVersionParts = version.split("\\.");
+        String[] minimumVersionParts = minimumVersion.split("\\.");
+
+        // Сравниваем части версий по порядку
+        int length = Math.max(currentVersionParts.length, minimumVersionParts.length);
+        for (int i = 0; i < length; i++) {
+            // Если компоненты не существуют, то считаем их равными 0
+            int currentPart = i < currentVersionParts.length ? Integer.parseInt(currentVersionParts[i]) : 0;
+            int minimumPart = i < minimumVersionParts.length ? Integer.parseInt(minimumVersionParts[i]) : 0;
+
+            if (currentPart < minimumPart) {
+                return true;
+            } else if (currentPart > minimumPart) {
+                return false;
+            }
+        }
+
+        return false;  // Версии одинаковые
     }
 
     private ObjectWrapper convertToObjectWrapper(Event event) {
